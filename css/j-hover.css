@@ -1,0 +1,52 @@
+.j-hover-effect {
+  float: left;
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 25px;
+  border-width: 1px;
+  margin: 1%; }
+
+.j-round .j-img img {
+  border-radius: 25px; }
+
+.j-round .j-caption {
+  border-radius: 25px; }
+
+.j-circle .j-img img {
+  border-radius: 50%; }
+
+.j-circle .j-caption {
+  border-radius: 50%; }
+
+.j-hover-effect .j-img {
+  width: 220px;
+  height: 220px; }
+
+.j-hover-effect .j-img img {
+  width: 100%;
+  height: 100%; }
+
+.j-hover-effect .j-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  background-color: black;
+  opacity: 0;
+  transition: all 0.7s ease; }
+
+.j-hover-effect .j-caption:hover {
+  opacity: 0.8; }
+
+.j-hover-effect .j-caption span {
+  position: absolute;
+  font-size: 25px;
+  color: white;
+  line-height: 220px;
+  width: 220px;
+  vertical-align: middle;
+  text-align: center; }
+
+/*# sourceMappingURL=j-hover.css.map */
