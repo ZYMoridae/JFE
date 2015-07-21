@@ -1,2 +1,3 @@
-# j-hover
-Image hover
+# J Components
+##Image hover effect
+##Button
