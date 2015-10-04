@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <title>JFE</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <style type="text/css">
+/*    .group-color .single-color {
+        text-align: center;
+        vertical-align: middle;
+        line-height: 120px;
+        padding: 0px;
+    }*/
+    
+    .group-color .color-block {
+        /*background-color: black;*/
+        height: 120px;
+        width: 120px;
+        /*border-radius: 5px;*/
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container animated fadeIn" style="margin: 0px;">
+        <div class="row">
+            <div class="col-md-12 group-color" style="top: 30%;">
+                    <div class="row">
+                    <div class="color-block"></div>
+                    <div class="color-block"></div>
+                    <div class="color-block"></div>
+                    <div class="color-block"></div>
+                    </div>
+            </div>
+        </div>
+       <!--  <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+                    <a href="\" class="btn  btn-lg btn-default btn-success" style="margin-right: 5%;">Like</a>
+                    <a href="\" class="btn btn-lg btn-default btn-warning">Dislike</a>
+            </div>    
+        </div> -->
+        <div class="row">
+            <div class="col-sm-12" style="bottom: 0;position: absolute;">
+                <div class="col-sm-6">
+                    <a href="">
+                        <i class="fa fa-angle-left fa-5x"></i>
+                    </a>
+                </div>
+                <div class="col-sm-6" style="text-align: right;">
+                     <a href="">
+                         <i class="fa fa-angle-right fa-5x"></i>
+                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    var colorStack = [];
+    for (var i = 0; i < 5; i++) {
+        var newColor = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
+        colorStack.push(newColor);
+    }   
+    if(colorStack.length == 5){
+        $('body').css('background-color', colorStack[0]);
+        for (var i = 1; i < 5 ; i++) {
+            $('.color-block').eq(i-1).css('background-color', colorStack[i]);
+        }
+    } 
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<html>
+
+<head>
+    <title>JFE</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+
+<body>
+    <canvas id="myCanvas" width="200" height="100" style="border: 1px solid #000000;"></canvas>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+    var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.beginPath();
+ctx.arc(95,50,40,0,2*Math.PI);
+ctx.fill();
+    </script>
+</body>
+
+</html>
