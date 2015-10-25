@@ -7,69 +7,235 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
     <style type="text/css">
-/*    .group-color .single-color {
-        text-align: center;
-        vertical-align: middle;
-        line-height: 120px;
-        padding: 0px;
-    }*/
-    
     .group-color .color-block {
-        /*background-color: black;*/
         height: 120px;
         width: 120px;
-        /*border-radius: 5px;*/
+    }
+    
+    .arrow-btn {
+        color: black;
+        background-color: transparent;
+        border: 0;
+        outline: none;
+        transition: all 0.5s ease;
+    }
+    
+    .arrow-btn:hover {
+        color: #327AB7;
+    }
+    
+    .color-description {
+        position: relative;
+        text-align: center;
+        top: 40%;
+    }
+    
+    .hero-color {
+        margin-top: 10%;
+        text-align: center;
+        font-size: 200;
     }
     </style>
 </head>
 
 <body>
-    <div class="container animated fadeIn" style="margin: 0px;">
+    <div class="hero-color"></div>
+    <div class="container animated fadeIn" style="margin: 0px;position: absolute;top: 0;left: 0;">
         <div class="row">
             <div class="col-md-12 group-color" style="top: 30%;">
-                    <div class="row">
-                    <div class="color-block"></div>
-                    <div class="color-block"></div>
-                    <div class="color-block"></div>
-                    <div class="color-block"></div>
+                <div class="row">
+                    <div class="color-block">
+                        <div class="color-description"></div>
                     </div>
+                    <div class="color-block">
+                        <div class="color-description"></div>
+                    </div>
+                    <div class="color-block">
+                        <div class="color-description"></div>
+                    </div>
+                    <div class="color-block">
+                        <div class="color-description"></div>
+                    </div>
+                </div>
             </div>
         </div>
-       <!--  <div class="row">
+        <!--  <div class="row">
             <div class="col-md-12" style="text-align: center;">
                     <a href="\" class="btn  btn-lg btn-default btn-success" style="margin-right: 5%;">Like</a>
                     <a href="\" class="btn btn-lg btn-default btn-warning">Dislike</a>
             </div>    
         </div> -->
+    </div>
+    <div class="container" style="margin: 0px;">
         <div class="row">
             <div class="col-sm-12" style="bottom: 0;position: absolute;">
                 <div class="col-sm-6">
-                    <a href="">
-                        <i class="fa fa-angle-left fa-5x"></i>
-                    </a>
+                    <button class="arrow-btn" id="left-arrow-btn">
+                        <i class="fa fa-angle-left fa-5x" style="margin-bottom: 2%;"></i>
+                    </button>
                 </div>
                 <div class="col-sm-6" style="text-align: right;">
-                     <a href="">
-                         <i class="fa fa-angle-right fa-5x"></i>
-                     </a>
+                    <button class="arrow-btn" id="right-arrow-btn">
+                        <i class="fa fa-angle-right fa-5x" style="margin-bottom: 2%;"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
     <script src="js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript">
-    var colorStack = [];
-    for (var i = 0; i < 5; i++) {
-        var newColor = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
-        colorStack.push(newColor);
-    }   
-    if(colorStack.length == 5){
-        $('body').css('background-color', colorStack[0]);
-        for (var i = 1; i < 5 ; i++) {
-            $('.color-block').eq(i-1).css('background-color', colorStack[i]);
-        }
-    } 
 
+
+
+    <script type="text/javascript">
+
+    var colorStack = [];
+
+
+    function setColor(){
+        // Generate the 5 random color
+        for (var i = 0; i < 5; i++) {
+            var newColor = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
+            while (colorStack.indexOf(newColor) != -1) {
+                newColor = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
+            }
+            if(colorStack[i] != null){
+                colorStack[i] = newColor;
+            }else{
+                colorStack.push(newColor);
+            }
+        }
+        //Execute a evolutionary on the color combination
+
+        updateColor();
+    }
+
+    //Update the color
+    function updateColor(){
+    // Set the color and the hex of the colorq
+        if (colorStack.length == 5) {
+            $('body').css('background-color', colorStack[0]);
+            $('.hero-color').text(colorStack[0])
+            for (var i = 1; i < 5; i++) {
+                $('.color-description').eq(i - 1).text(colorStack[i]);
+                $('.color-block').eq(i - 1).css('background-color', colorStack[i]).fadeIn();
+            }
+        }
+    }
+
+
+
+    //Used for convert the color from binary to hex
+    function hexConverter(binaryColor){
+        return parseInt(binaryColor, 2).toString(16);
+    }
+
+
+    //Used for convert the color from hex to binary
+    function binaryConverter(hexColor){
+        return binaryFill(parseInt(hexColor.substr(1, 7), 16).toString(2));
+    }
+
+    //Fill the binary representation of the color with 0
+    function binaryFill(originalHexColor){
+        if(originalHexColor.length < 32){
+            var resHexColor = "";
+            for(var i = 0; i < 32-originalHexColor.length; i++){
+                resHexColor += "0";
+            }
+            resHexColor += originalHexColor;
+            return resHexColor;
+        }
+        else
+            return originalHexColor;
+    }
+
+    //The evolutionary of the 
+    function colorEvolution(){
+
+        //Build up the population of color
+        var population = [];
+        for( var i = 0; i < colorStack.length - 1; i++){
+            for(var j = i + 1; j < colorStack.length; j++){
+                var parentFirst = binaryConverter(colorStack[i]);
+                var parentSecond = binaryConverter(colorStack[j]);
+                population.push(doCrossover(parentFirst, parentSecond));
+                // alert(i+":"+parentFirst+","+j+":"+parentSecond);
+                // if(i==0 && j==1)
+                // {
+                //     var tempBinary = parseInt(colorStack[i].substr(1, 7), 16).toString(2);
+                //     alert("original:"+colorStack[i]+","+"now:"+"0x"+colorStack[i].substr(1, 7)+",transfer:"+tempBinary);
+                //     alert(hexConverter(tempBinary));
+                // }
+            }
+        }
+
+        //Do the evaluation of the whole population
+        evaluation(population);
+
+
+    }
+
+
+    function evaluation(curPopulation){
+        // curPopulation.sort();
+        colorStack = [];
+        colorStack.length = 0;
+        for(var i = 0; i < 5; i++){
+            //How to do the reverse cycle
+            colorStack.push('#'+hexConverter(curPopulation[i]));
+        }
+    }
+
+
+
+    function doCrossover(parent1, parent2){
+        return uniformCrossover(parent1, parent2);
+    }
+
+
+    function uniformCrossover(parent1, parent2){
+        var resultSet = [];
+        // alert(parent1+"\n"+parent2);
+        var randomPosition = parseInt(Math.random() * 32);
+        var coResult1 = parent1.substr(0, randomPosition)+parent2.substr(randomPosition, parent2.length-1);
+        // alert(randomPosition+"\n"+coResult1+"\n"+parent1);
+        var coResult2 = parent2.substr(0, randomPosition)+parent1.substr(randomPosition, parent1.length-1);
+        resultSet.push(coResult1);
+        resultSet.push(coResult2);
+        return resultSet;
+    }
+
+    function bitFlip(parent1){
+        var resultSet = [];
+        var randomPosition = Math.random() * 32;
+        if(parent1.charAt(randomPosition) == "0"){
+            parent1.replaceAt(randomPosition, "1");
+        }else if(parent1.charAt(randomPosition) == "1"){
+            parent1.replaceAt(randomPosition, "0");
+        }
+        return resultSet;
+    }
+
+
+    //Initialize the page
+    $(document).ready(function() {
+        setColor();
+
+        // alert(binaryFill(parseInt(colorStack[0].substr(1, 7), 16).toString(2)));
+        // colorEvolution();
+    });
+
+
+    $("#left-arrow-btn").click(function() {
+       setColor();
+    });
+
+
+    $("#right-arrow-btn").click(function() {
+       // setColor();
+       colorEvolution();
+       updateColor();
+    });
     </script>
 </body>
 

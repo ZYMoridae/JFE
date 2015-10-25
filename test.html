@@ -1,0 +1,23 @@
+<html>
+<head>
+		
+</head>
+<body>
+	<div id="ftest"></div>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		var value1 = 0x1000000;
+		var value2 = 0x111111;
+		var value3 = 0xffffff;
+		console.log("value1 is:"+value1.toString(16));
+		console.log("value2 is:"+value2.toString(16));
+
+		value3 = Math.random()*0xffffff+value1;
+		console.log("value3 is:"+value3.toString(16));
+		console.log("sub value3 is:"+value3.toString(16).substr(1,6));
+
+		var newColor = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
+		console.log((0x1000000 + (Math.random()) * 0xffffff).toString(16));
+	</script>
+</body>
+</html>
