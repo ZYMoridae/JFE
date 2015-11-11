@@ -1,0 +1,93 @@
+<html>
+<head>
+	
+</head>
+<body>
+	<script type="text/javascript">
+		var Moridae = Moridae || {};
+		Moridae.commonMethod = {
+			test1: "Hello",
+			test2: "World",
+			validateTest: function(){
+				console.log(this.test1+" "+this.test2);
+			},
+			validateTest2: function(para1, para2, para3){
+				console.log(para1+" "+para2+" "+para3);
+			}
+		}
+		Moridae.commonMethod.validateTest();
+		Moridae.commonMethod.validateTest2("Hello","Test","Joe");
+
+		var Person = function (firstName) {
+  			this.firstName = firstName;
+		};
+
+		Person.prototype.validateTest = function(){
+  			console.log('Person instantiated');
+		};
+		var person1 = new Person('Alice');
+		person1.validateTest();
+		var person2 = new Person('Bob');
+		person2.validateTest();
+
+		//Class construct demo
+
+		Person.prototype.walk = function(){
+			console.log("I am walking!");
+		};
+
+		Person.prototype.sayHello = function(){
+			console.log("Hello I'm "+this.firstName);
+		};
+
+		function Student(firstName, subject){
+			Person.call(this, firstName);
+
+			this.subject = subject;
+		}
+
+
+
+
+	</script>
+	<script type="text/javascript">
+		"use strict";
+
+		//Class definition
+		class Cat { 
+			// var nickName = "nickname";
+
+			constructor(name) {
+				this.name = name;
+				this.nickName = "nickname";
+			}
+			speak() {
+				console.log(this.name + ' makes a noise.');
+			}
+			say() {
+				console.log(this.nickName);
+			}
+		}
+
+		var test = new Cat('Lucy');
+		test.speak();
+		test.say();
+	</script>
+	<script type="text/javascript">
+		'use strict';
+
+		var helloWorld = 7;
+		console.log(helloWorld);
+
+		var joe = {
+			test1: "2",
+			test2: "3",
+			test3: function(){
+				console.log(this.test1+this.test2);
+			}
+		}
+		console.log(joe.test1);
+		joe.test3();
+	</script>
+</body>
+</html>
